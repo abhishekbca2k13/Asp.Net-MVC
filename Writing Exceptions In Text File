@@ -1,0 +1,21 @@
+        /// <summary>
+        /// method to write the exception in the LogFile if exception details are not inserted in exception table in databse
+        /// </summary>
+        /// <param name="ex"></param>
+        public void InsertExceptionIntoLogFile(Exception ex)
+        {     
+                var filePath = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/"));
+                filePath = filePath + "\\ExceptionLogFile.txt";
+                using (StreamWriter writer = new StreamWriter(filePath, true))
+                {
+                    writer.WriteLine();
+                    writer.Write("Date = " + DateTime.Now.Date);
+                    writer.WriteLine();
+                    writer.Write("Error occured at method = " + ex.TargetSite.ToString());
+                    writer.WriteLine();
+                    writer.Write("Error code for the Exception is = " + ex.HResult.ToString());
+                    writer.WriteLine();
+                    writer.Write("Message for the exception = " + ex.Message.ToString());
+                    writer.WriteLine();
+                }
+            }
