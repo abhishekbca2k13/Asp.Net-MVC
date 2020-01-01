@@ -1,0 +1,17 @@
+public int ExceptionInsert(Exception exdb)
+        {       
+                int success=0;
+                SqlCommand cmd = new SqlCommand("YourStoredProcedureToInsertDataInDatabase",YourConnectionString);
+                cmd.CommandType = CommandType.StoredProcedure;
+                
+                cmd.Parameters.AddWithValue("@exceptionNumber", exdb.HResult.ToString());
+                cmd.Parameters.AddWithValue("@message", exdb.Message.ToString());
+                cmd.Parameters.AddWithValue("@method", exdb.TargetSite.ToString());                
+                
+                con.Open();
+                success = cmd.ExecuteNonQuery();              
+                con.Close();
+                
+                return success;
+
+            }
