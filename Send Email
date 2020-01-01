@@ -1,0 +1,21 @@
+public void SendEmail(Student sr)
+        {                                   
+                MailMessage mm = new MailMessage();
+                mm.From = new MailAddress("abhishek.keshari@clanstech.com");
+                mm.To.Add("ReciverMailId");
+                mm.Subject = "Subject of Email";
+
+                //Body of the email with email varification link
+                mm.Body = string.Format("Your Email Body Content");
+
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "Your Mail Host Id";
+                smtp.Port = 25;
+                smtp.EnableSsl = false;
+                
+                NetworkCredential nc = new NetworkCredential("SenderEmailId", "Password");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = nc;
+                smtp.Send(mm);           
+            }
